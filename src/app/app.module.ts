@@ -7,19 +7,34 @@ import { ToDoListComponent } from './components/to-do-list/to-do-list.component'
 import { ActionService } from './services/action.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+//import { ExampleComponent } from './components/components/example/example.component';
+//import { NewActionInputComponent } from './components/new-action-input/new-action-input.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MatTableModule,
-    ToDoListComponent
+    ToDoListComponent,
+    //NewActionInputComponent,
+    //FormsModule
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    MatTableModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    FormsModule
   ],
   providers: [ActionService],
   bootstrap: [AppComponent]

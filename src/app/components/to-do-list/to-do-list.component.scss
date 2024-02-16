@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+}
+
+
+
+.custom-button-add {
+  background-color: transparent; /* Set the background color to transparent */
+  color: green; /* Set the color of the icon */
+
+  &:hover {
+    background-color: transparent; /* Set the background color on hover, if needed */
+  }
+}
+
+.custom-icon-add {
+  color: green; /* Set the color of the icon */
+}
+
+.custom-button-edit {
+  background-color: transparent; /* Set the background color to transparent */
+  color: blue; /* Set the color of the icon */
+
+  &:hover {
+    background-color: transparent; /* Set the background color on hover, if needed */
+  }
+}
+
+.custom-icon-edit {
+  color: blue; /* Set the color of the icon */
+}
+
+.custom-button-remove {
+  background-color: transparent; /* Set the background color to transparent */
+  color: red; /* Set the color of the icon */
+
+  &:hover {
+    background-color: transparent; /* Set the background color on hover, if needed */
+  }
+}
+
+.custom-icon-remove {
+  color: red; /* Set the color of the icon */
+}

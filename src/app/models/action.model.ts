@@ -1,6 +1,7 @@
 export interface ActionModel{
   actionId:string,
   description:string,
-  isDone:boolean
+  isDone:boolean,
+  index:number
 
 }
