@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActionModel } from 'src/app/models/action.model';
 import { ActionService } from '../../services/action.service';
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
 
 
 /**
@@ -44,23 +45,23 @@ export class ToDoListComponent {
     });
   }
   postAction(actionInput: string): void {
-  
+
     const newGuid = uuidv4();
 
     const actionModel: ActionModel = {
-     
+
       actionId: newGuid,
       description: actionInput,
       isDone: false,
       index:0
     };
-    
+
     this.actionService.postAction(actionModel).subscribe({
-      
+
       next: (data) => {
-        
+
         console.log("API sent !");
-        
+
         this.loadTodos();
       },
       error: (error) => {
@@ -69,24 +70,24 @@ export class ToDoListComponent {
     });
   }
   patchAction(selectedRow : ActionModel): void {
-  
-  
+
+
    //const newGuid = uuidv4();
-/* 
+/*
     const actionModel: ActionModel = {
-     
+
       actionId: selectedRow.actionId,
       description: selectedRow.description,
       isDone: selectedRow.isDone
     }; */
     console.log(selectedRow);
-    
+
     this.actionService.patchAction(selectedRow).subscribe({
-      
+
       next: (data) => {
-        
+
         console.log("API sent !");
-        
+
         this.loadTodos();
       },
       error: (error) => {
@@ -94,16 +95,16 @@ export class ToDoListComponent {
       },
     });
   }
-  
+
   deleteAction(selectedRow: any): void {
-  
-     
+
+
      this.actionService.deleteAction(selectedRow.action_Id).subscribe({
-       
+
        next: (data) => {
-         
+
          console.log("API sent !");
-         
+
          this.loadTodos();
        },
        error: (error) => {
@@ -137,12 +138,19 @@ export class ToDoListComponent {
       row.actionId + 1
     }`;
   }
-  
+
 
   onButtonAdd() {
     // Add the logic you want to execute when Button 1 is clicked
     console.log('Button 1 clicked for:');
     this.postAction(this.actionInput);
+     // Show a success alert using SweetAlert2
+     Swal.fire({
+      title: 'Success!',
+      text: 'Action added successfully.',
+      icon: 'success',
+      confirmButtonText: 'OK',
+    });
     this.actionInput = '';
 
   }
@@ -159,11 +167,25 @@ export class ToDoListComponent {
     this.patchAction(element);
   }
 
-  
+
   onButtonDelete(element: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User clicked "Yes, delete it!" button
+        this.deleteAction(element);
+      }
+    });
     // Add the logic you want to execute when Button 2 is clicked
-    console.log('Button 2 clicked for:', element);
-    this.deleteAction(element);
+   // console.log('Button 2 clicked for:', element);
+    //this.deleteAction(element);
   }
 
    // Function to toggle the selected status of a todo
@@ -177,5 +199,5 @@ export class ToDoListComponent {
     this.patchAction(element);
   }
 
-   
+
 }
