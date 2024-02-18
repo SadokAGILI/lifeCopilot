@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  lifecopilot:
+    image: lifecopilot
+    build:
+      context: .
+      dockerfile: ./Dockerfile

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ActionModel } from '../models/action.model';
+import { ActionModel,Response } from '../models/action.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +13,20 @@ export class ActionService {
   private deleteActionUrl=  'https://localhost:7175/api/Action/DeleteActionById';
   constructor(private http: HttpClient) { }
 
-  getTodos(): Observable<ActionModel[]> {
+  getTodos(): Observable<Response> {
 
-    return this.http.get<ActionModel[]>(`${this.getActionsUrl}`);
+    return this.http.get<Response>(`${this.getActionsUrl}`);
   }
 
-  postAction(actionModel: ActionModel): Observable<ActionModel[]> {
-    return this.http.post<ActionModel[]>(this.postActionUrl, actionModel);
+  postAction(actionModel: ActionModel): Observable<Response> {
+    return this.http.post<Response>(this.postActionUrl, actionModel);
   }
-  patchAction(actionModel: ActionModel): Observable<ActionModel[]> {
-    return this.http.patch<ActionModel[]>(this.patchActionUrl, actionModel);
+  patchAction(actionModel: ActionModel): Observable<Response> {
+    return this.http.patch<Response>(this.patchActionUrl, actionModel);
   }
-  deleteAction(actionId: string): Observable<ActionModel[]> {
+  deleteAction(actionId: string): Observable<Response> {
     const url = `${this.deleteActionUrl}/${actionId}`;
-  
-    return this.http.delete<ActionModel[]>(url);
+
+    return this.http.delete<Response>(url);
   }
 }

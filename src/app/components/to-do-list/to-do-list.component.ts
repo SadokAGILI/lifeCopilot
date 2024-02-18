@@ -29,12 +29,12 @@ export class ToDoListComponent {
 
   constructor(private actionService: ActionService) {}
   ngOnInit(): void {
-    this.loadTodos();
+    this.loadActions();
   }
-  loadTodos(): void {
+  loadActions(): void {
     this.actionService.getTodos().subscribe({
-      next: (data) => {
-        this.actions = data;
+      next: (response) => {
+        this.actions = response.data;
         const checkedTodos = this.actions.filter(todo => todo.isDone);
         this.dataSource = new MatTableDataSource<ActionModel>(this.actions);
         console.log(this.dataSource.filteredData);
@@ -58,11 +58,11 @@ export class ToDoListComponent {
 
     this.actionService.postAction(actionModel).subscribe({
 
-      next: (data) => {
+      next: (response) => {
 
         console.log("API sent !");
 
-        this.loadTodos();
+        this.loadActions();
       },
       error: (error) => {
         console.error('Error posting  action:', error);
@@ -88,7 +88,7 @@ export class ToDoListComponent {
 
         console.log("API sent !");
 
-        this.loadTodos();
+        this.loadActions();
       },
       error: (error) => {
         console.error('Error posting  action:', error);
@@ -105,7 +105,7 @@ export class ToDoListComponent {
 
          console.log("API sent !");
 
-         this.loadTodos();
+         this.loadActions();
        },
        error: (error) => {
          console.error('Error posting  action:', error);
