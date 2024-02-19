@@ -18,6 +18,8 @@
         <mat-icon class="custom-icon-add">add</mat-icon>
       </button>
     </form>
+    <!-- Display error message if input is empty -->
+    <div *ngIf="showError" style="color: red; margin-top: 10px;">Please enter an action.</div>
   </mat-card-content>
 </mat-card>
 <br>
@@ -35,7 +37,7 @@
       <mat-checkbox
       [checked]="row.isDone"
       (change)="toggleTodoSelection(row)"
-        
+
       >
       </mat-checkbox>
     </td>

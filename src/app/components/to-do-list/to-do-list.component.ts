@@ -26,6 +26,7 @@ export class ToDoListComponent {
   selection = new SelectionModel<ActionModel>(true, []);
   selectedTodoIds: Set<ActionModel> = new Set();
   selectedRow: ActionModel | null = null; // Variable to track the selected row for editing
+  showError: boolean | undefined;
 
   constructor(private actionService: ActionService) {}
   ngOnInit(): void {
@@ -141,8 +142,12 @@ export class ToDoListComponent {
 
 
   onButtonAdd() {
-    // Add the logic you want to execute when Button 1 is clicked
-    console.log('Button 1 clicked for:');
+    if (this.actionInput.trim() === '') {
+      // Show error message
+      this.showError = true;
+    } else {
+      // Reset error state
+      this.showError = false;
     this.postAction(this.actionInput);
      // Show a success alert using SweetAlert2
      Swal.fire({
@@ -153,7 +158,7 @@ export class ToDoListComponent {
     });
     this.actionInput = '';
 
-  }
+  }}
   onButtonEdit(element: ActionModel): void {
     // Set the selectedRow when the "Edit" button is clicked
     this.selectedRow = element;
